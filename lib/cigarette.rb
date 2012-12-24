@@ -1,9 +1,20 @@
+require 'curses'
 require 'yaml'
 require 'cigarette/numeric.rb'
 
 class Cigarette
 
-  VERSION = "1.0"
+  DEFAULT = Curses::A_NORMAL
+  BLACK   = 0
+  RED     = 1
+  GREEN   = 2
+  YELLOW  = 3
+  BLUE    = 4
+  MAGENTA = 5
+  CYAN    = 6
+  WHITE   = 7
+
+  VERSION = "1.1"
   # Hope.
   CANCER_DO_NOT_APPEAR = 42
 
@@ -20,7 +31,9 @@ class Cigarette
     rescue Exception => e
       abort "Problem during .cigarette loading: #{e.message}"
     end
-    puts "Cigarette launched - version #{VERSION}."
+    init_curses
+    deploy_trap
+    display_version
     lighter_please!
   end
 
@@ -34,11 +47,12 @@ class Cigarette
         status = $?.success? unless defined? status
         current_status = $?.success?
         banner = ($?.success? ? "SUCCESS" : "ERROR(S)")
-        puts "#{banner} - #{@current_time.strftime("at: %T")}"
-        if status != current_status
-          puts output
-        end
+        Curses.clear
+        display(2, 10, "#{banner} - #{@current_time.strftime("at: %T")}")
+        display(2, 2, "STATUS")
+        display(4, 0, output)
         status = current_status
+        Curses.refresh
       end
     end
   end
@@ -51,6 +65,43 @@ class Cigarette
     else
       false
     end
+  end
+
+  def init_curses
+    Curses.noecho # do not show typed keys
+    Curses.init_screen
+    Curses.stdscr.keypad(true) # enable arrow keys
+    Curses.start_color
+    Curses.init_pair(RED, RED, BLACK)
+    Curses.init_pair(GREEN, GREEN, BLACK)
+    Curses.init_pair(MAGENTA, MAGENTA, WHITE)
+    Curses.init_pair(CYAN, CYAN, BLACK)
+    display(2, 2, "STATUS:")
+    display(2, 10, "WAITING")
+    Curses.refresh
+  end
+
+  def deploy_trap
+    for i in 1 .. 15  # SIGHUP .. SIGTERM
+      if trap(i, "SIG_IGN") != 0 then  # 0 for SIG_IGN
+        trap(i) {|sig| onsig(sig) }
+      end
+    end
+  end
+
+  def display(line, column, text, color = DEFAULT)
+    Curses.setpos(line, column)
+    Curses.attron(Curses.color_pair(color | DEFAULT)) { Curses.addstr(text) }
+  end
+
+  def display_version
+    display(0,0, "cigarette - Version #{VERSION}")
+    Curses.refresh
+  end
+
+  def onsig(sig)
+    Curses.close_screen
+    exit sig
   end
 
 end
