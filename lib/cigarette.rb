@@ -14,7 +14,7 @@ class Cigarette
   CYAN    = 6
   WHITE   = 7
 
-  VERSION = "1.1"
+  VERSION = "1.2"
   # Hope.
   CANCER_DO_NOT_APPEAR = 42
 
@@ -33,26 +33,31 @@ class Cigarette
     end
     init_curses
     deploy_trap
-    display_version
     lighter_please!
   end
 
   private
 
+  def display_main_screen
+    Curses.clear
+    display(0,0, "cigarette - Version #{VERSION}")
+    display(2, 10, "#{@banner} - #{@current_time.strftime("at: %T")}")
+    display(2, 2, "STATUS:")
+    display(4, 0, @output)
+    Curses.refresh
+  end
+
   def lighter_please!
     while CANCER_DO_NOT_APPEAR
       sleep 0.1
-      if time_to_light_up?
-        output = `#{@command} 2>&1`
+      if @current_time.nil? || time_to_light_up?
+        @current_time = Time.now if @current_time.nil?
+        @output = `#{@command} 2>&1`
         status = $?.success? unless defined? status
         current_status = $?.success?
-        banner = ($?.success? ? "SUCCESS" : "ERROR(S)")
-        Curses.clear
-        display(2, 10, "#{banner} - #{@current_time.strftime("at: %T")}")
-        display(2, 2, "STATUS")
-        display(4, 0, output)
+        @banner = ($?.success? ? "SUCCESS" : "ERROR(S)")
+        display_main_screen
         status = current_status
-        Curses.refresh
       end
     end
   end
@@ -92,11 +97,6 @@ class Cigarette
   def display(line, column, text, color = DEFAULT)
     Curses.setpos(line, column)
     Curses.attron(Curses.color_pair(color | DEFAULT)) { Curses.addstr(text) }
-  end
-
-  def display_version
-    display(0,0, "cigarette - Version #{VERSION}")
-    Curses.refresh
   end
 
   def onsig(sig)
