@@ -75,7 +75,14 @@ You could see:
       - 1.8.7
       - 1.9.3
 
-'rake test' will be executed each 75 seconds with ruby 1.8.7 and ruby 1.9.3.
+Or:
+
+  each: 10
+  command: rake test
+
+'rake test' will be executed each 75 seconds with ruby 1.8.7 and ruby 1.9.3 int the first example.
+
+In the second example, if you don't specify rvm attribute, 'rake test' will be executed with your running ruby (system installed ruby if rvm is not setup or configured or rvm current ruby) only. :)
 
 To use rvm: attribute, you have to setup RVM.
 
