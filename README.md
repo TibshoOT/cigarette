@@ -77,8 +77,8 @@ You could see:
 
 Or:
 
-  each: 10
-  command: rake test
+    each: 10
+    command: rake test
 
 'rake test' will be executed each 75 seconds with ruby 1.8.7 and ruby 1.9.3 int the first example.
 
