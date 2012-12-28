@@ -7,7 +7,7 @@ require 'cigarette/rvm'
 class Cigarette
   include Colors
 
-  VERSION = "2.0"
+  VERSION = "2.1"
   # Hope.
   CANCER_DO_NOT_APPEAR = 42
 
@@ -21,15 +21,17 @@ class Cigarette
         RVM.use_system!
         @rubies = [RUBY_VERSION]
       end
-      @time = (cnf[:each] || cnf['each']).to_i
+      @time = cnf['each'].to_i
       @next_check = Time.now.to_i + @time
-      @command = cnf[:command] || cnf['command']
+      @command = cnf['command']
+    rescue NoMethodError
+      abort "Problem during .cigarette loading: 'each:' and 'command:' attributes are MANDATORY."
     rescue TypeError
       abort "Didn't you make a mistake in .cigarette file ?"
     rescue ArgumentError
-      abort "Did you configure attribute like this: 'attribute: <value>'"
+      abort "Did you configure attribute like this: 'attribute: <value>'."
     rescue Exception => e
-      abort "Problem during .cigarette loading: #{e.message}"
+      abort "Problem during .cigarette loading: #{e.message}."
     end
     deploy_trap
     init_curses

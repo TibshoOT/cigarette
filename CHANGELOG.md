@@ -1,5 +1,9 @@
 # Cigarette changelog
 
+## 2.1 / 2012-12-28
+
+* Add useful error message.
+
 ## 2.0 / 2012-12-28
 
 * Add RVM support.
