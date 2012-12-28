@@ -1,8 +1,8 @@
-# cigarette - 2.*
+# cigarette
 
 Tiny test tool.
 
-For 1.* versions of cigarette, please read [this README](https://github.com/TibshoOT/cigarette/blob/master/README-v1.md).
+This README is for cigarette 1.* versions (without RVM management).
 
 ## Requirements
 
@@ -56,30 +56,18 @@ At the moment, there is only two options:
     <td>a command to execute</td>
     <td>This command will be exectued each :each configuration</td>
   </tr>
-  <tr>
-    <th>rvm</th>
-    <td>List of rubies</td>
-    <td>Each ruby will be tested with its own status</td>
-  </tr>
 </table>
 
 Example:
 
     $ cat .cigarette
 
-You could see:
+You should see:
 
     each: 75
     command: 'rake test'
-    rvm:
-      - 1.8.7
-      - 1.9.3
 
-'rake test' will be executed each 75 seconds with ruby 1.8.7 and ruby 1.9.3.
-
-To use rvm: attribute, you have to setup RVM.
-
-Please, follow RVM man instructions [here](https://rvm.io/).
+'rake test' will be executed each 75 seconds.
 
 ### Time helper
 

@@ -1,5 +1,11 @@
 # Cigarette changelog
 
+## 2.0 / 2012-12-28
+
+* Add RVM support.
+* Threads.
+* Colors.
+
 ## 1.2 / 2012-12-26
 
 * Code update.
