@@ -7,7 +7,7 @@ require 'cigarette/rvm'
 class Cigarette
   include Colors
 
-  VERSION = "2.1"
+  VERSION = "2.2"
   # Hope.
   CANCER_DO_NOT_APPEAR = 42
 

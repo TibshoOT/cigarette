@@ -1,5 +1,10 @@
 # Cigarette changelog
 
+## 2.2 / 2012-12-31
+
+* DRYing.
+* Add rebuild command.
+
 ## 2.1 / 2012-12-28
 
 * Add useful error message.

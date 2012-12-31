@@ -128,6 +128,39 @@ You can pluralize these helpers (seconds, minutes, hours).
 
     each: 5.hours
 
+## Curse interface
+
+
+You have some shortcuts:
+
+<table>
+  <tr>
+    <th>Shortcut</th>
+    <th>Binded key</th>
+    <th>Explanation</th>
+  </tr>
+  <tr>
+    <th>Rebuild</th>
+    <td>r</td>
+    <td>Useful to run command again between to run time</td>
+  </tr>
+  <tr>
+    <th>Quit</th>
+    <td>q</td>
+    <td>Quit cigarette</td>
+  </tr>
+  <tr>
+    <th>Left</th>
+    <td>Left arrow</td>
+    <td>Switch to the left (when you have some rubies)</td>
+  </tr>
+  <tr>
+    <th>Right</th>
+    <td>Right arrow</td>
+    <td>Switch to the right (when you have some rubies)</td>
+  </tr>
+</table>
+
 ## Usage
 
 Go to containing .cigarette file directory and run cigarette:
