@@ -141,6 +141,12 @@ class Cigarette
     }
   end
 
+  def move
+    @current_rb = @rubies[@pos]
+    out = @outputs[@rubies[@pos]]
+    display_main_screen(out[:status], out[:output], out[:time], out[:color])
+  end
+
   def inc_pos
     if @pos == @rubies.length - 1
       @pos = 0
@@ -151,9 +157,7 @@ class Cigarette
 
   def move_right
     inc_pos
-    @current_rb = @rubies[@pos]
-    out = @outputs[@rubies[@pos]]
-    display_main_screen(out[:status], out[:output], out[:time], out[:color])
+    move
   end
 
   def dec_pos
@@ -166,9 +170,7 @@ class Cigarette
 
   def move_left
     dec_pos
-    @current_rb = @rubies[@pos]
-    out = @outputs[@rubies[@pos]]
-    display_main_screen(out[:status], out[:output], out[:time], out[:color])
+    move
   end
 
   def onsig(sig = nil)
