@@ -17,11 +17,13 @@ Tested with Ruby:
 
 ## Installation
 
-    gem install cigarette
+    $ gem install cigarette
 
-or
+or, for development:
 
-    git clone https://github.com/TibshoOT/cigarette.git
+    $ git clone https://github.com/TibshoOT/cigarette.git
+    $ gem build cigarette.gemspec
+    $ gem install ./cigarette
 
 ## Configuration
 
