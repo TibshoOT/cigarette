@@ -45,7 +45,7 @@ class Cigarette
     Curses.clear
     display_menu
     display(0,0, "cigarette - Version #{VERSION}")
-    display(4, 8, "#{status}", color)
+    display(4, 8, status, color)
     padding_for_time = 8 + status.length
     display(4, padding_for_time," - #{time.strftime("%T")}")
     display(4, 0, "STATUS:")
@@ -61,6 +61,7 @@ class Cigarette
       case Curses.getch
         when Curses::Key::RIGHT then move_right
         when Curses::Key::LEFT then move_left
+        when ?r then rebuild
         when ?q then onsig
       end
     end
@@ -139,6 +140,13 @@ class Cigarette
       display(2, padding, ruby, color)
       padding += 8
     }
+  end
+
+  def rebuild
+    @current_rb = @rubies[@pos]
+    @outputs[@current_rb] = RVM.run(@current_rb) { @command }
+    out = @outputs[@current_rb]
+    display_main_screen(out[:status], out[:output], out[:time], out[:color])
   end
 
   def move
