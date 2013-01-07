@@ -84,6 +84,9 @@ class Cigarette
               out = @outputs[ruby.to_s]
               display_main_screen(out[:status], out[:output],
                                   out[:time], out[:color])
+            else
+              display_menu
+              Curses.refresh
             end
           end
           sleep 0.1
