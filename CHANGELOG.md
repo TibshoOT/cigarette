@@ -1,5 +1,9 @@
 # Cigarette changelog
 
+## 2.3 / 2013-01-07
+
+* Refresh menu at start.
+
 ## 2.2 / 2012-12-31
 
 * DRYing.

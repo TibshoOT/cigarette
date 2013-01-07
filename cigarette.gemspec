@@ -1,7 +1,7 @@
 t = Time.now
 Gem::Specification.new do |s|
   s.name        = "cigarette"
-  s.version     = "2.2"
+  s.version     = "2.3"
   s.date        = t.strftime("%Y-%m-%d")
   s.summary     = "Tiny test tool"
   s.description = "Tiny test tool"
