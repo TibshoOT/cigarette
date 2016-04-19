@@ -1,3 +1,5 @@
+DEVELOPMENT STOPPED. EOL.
+
 # cigarette - 2.*
 
 Tiny test tool.
